@@ -7,9 +7,17 @@ function computerPlay() {
 }
 
 function play(playerSelection, computerSelection) {
-    if ((playerChoice === "Paper" && computerChoice === "Rock") ||
-        (playerChoice === "Rock" && computerChoice === "Scissors") ||
-        (playerChoice === "Scissors" && computerChoice === "Paper")) {
-            console.log ("You win!", playerSelection, "beats", computerSelection)
+    console.log("You chose", playerSelection, "and the Computer chose", computerSelection);
+    if ((playerSelection === "Paper" && computerSelection === "Rock") ||
+            (playerSelection === "Rock" && computerSelection === "Scissors") ||
+            (playerSelection === "Scissors" && computerSelection === "Paper")) {
+        console.log("You win!", playerSelection, "beats", computerSelection);
+    } else if (playerSelection === computerSelection) {
+        console.log("It's a tie, both chose", playerSelection);
+    }
+        else {
+        console.log("You lose!", computerSelection, "beats", playerSelection);
     }
 }
+
+play(playerChoice, computerPlay())
