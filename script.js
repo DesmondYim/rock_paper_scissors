@@ -6,22 +6,46 @@ function computerPlay() {
     return computerChoice;
 }
 
-function play(playerSelection, computerSelection) {
-    console.log("You chose", playerSelection, "and the Computer chose", computerSelection);
+function playRound(playerSelection, computerSelection) {
     if (playerSelection.toUpperCase() != "rock".toUpperCase() &&
             playerSelection.toUpperCase() != "paper".toUpperCase() &&
             playerSelection.toUpperCase() != "scissors".toUpperCase()) {
-        console.log("Error! Please input a valid answer")
+        return `You chose ${playerSelection} and the Computer chose ${computerSelection} 
+            Error! Please input a valid choice!`;
     } else if ((playerSelection.toUpperCase() === "Paper".toUpperCase() && computerSelection.toUpperCase() === "Rock".toUpperCase()) ||
             (playerSelection.toUpperCase() === "Rock".toUpperCase() && computerSelection.toUpperCase() === "Scissors".toUpperCase()) ||
             (playerSelection.toUpperCase() === "Scissors".toUpperCase() && computerSelection.toUpperCase() === "Paper".toUpperCase())) {
-        console.log("You win!", playerSelection, "beats", computerSelection);
+        return `You chose ${playerSelection} and the Computer chose ${computerSelection}. 
+            You win! ${playerSelection} beats ${computerSelection}`;
     } else if (playerSelection.toUpperCase() === computerSelection.toUpperCase()) {
-        console.log("It's a tie, both chose", playerSelection);
+        return `You chose ${playerSelection} and the Computer chose ${computerSelection}.
+            It's a tie, both chose ${playerSelection}`;
     }
         else {
-        console.log("You lose!", computerSelection, "beats", playerSelection);
+        return `You chose ${playerSelection} and the Computer chose ${computerSelection}.
+            You lose! ${computerSelection} beats ${playerSelection}`;
     }
 }
 
-play(playerChoice, computerPlay())
+    const playerSelection = playerChoice;
+    const computerSelection = computerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+
+//     console.log("You chose", playerSelection, "and the Computer chose", computerSelection);
+//     if (playerSelection.toUpperCase() != "rock".toUpperCase() &&
+//             playerSelection.toUpperCase() != "paper".toUpperCase() &&
+//             playerSelection.toUpperCase() != "scissors".toUpperCase()) {
+//         console.log("Error! Please input a valid answer")
+//     } else if ((playerSelection.toUpperCase() === "Paper".toUpperCase() && computerSelection.toUpperCase() === "Rock".toUpperCase()) ||
+//             (playerSelection.toUpperCase() === "Rock".toUpperCase() && computerSelection.toUpperCase() === "Scissors".toUpperCase()) ||
+//             (playerSelection.toUpperCase() === "Scissors".toUpperCase() && computerSelection.toUpperCase() === "Paper".toUpperCase())) {
+//         console.log("You win!", playerSelection, "beats", computerSelection);
+//     } else if (playerSelection.toUpperCase() === computerSelection.toUpperCase()) {
+//         console.log("It's a tie, both chose", playerSelection);
+//     }
+//         else {
+//         console.log("You lose!", computerSelection, "beats", playerSelection);
+//     }
+// }
+
+// play(playerChoice, computerPlay())
