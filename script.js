@@ -6,10 +6,17 @@ function computerPlay() {
     return computerChoice;
 }
 
-function playGame(playerSelection, computerSelection) {
-    for (let i = 0; i < 5; i++) {
-        function playRound();
-    }
+function playGame() {
+    for each round out of 5
+    if playround is win
+        then + 1 for me
+    else loss
+    then + 1 for computer
+    report score "You scored ___, and the computer scored ___"
+    
+    // for (let i = 0; i < 5; i++) {
+    //     console.log(playRound(playerSelection,computerSelection));
+    
 
     function playRound(playerSelection, computerSelection) {
         if (playerSelection.toUpperCase() != "rock".toUpperCase() &&
@@ -31,8 +38,8 @@ function playGame(playerSelection, computerSelection) {
             You lose! ${computerSelection} beats ${playerSelection}`;
         }
     }
-}
 
     const playerSelection = playerChoice;
     const computerSelection = computerPlay();
     console.log(playRound(playerSelection, computerSelection));
+}
