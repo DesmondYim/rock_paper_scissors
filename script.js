@@ -1,4 +1,4 @@
-let choice = prompt("Rock, paper, or scissors?");
+let playerChoice = prompt("Rock, paper, or scissors?");
 
 function computerPlay() {
     let computerChoices = ['Rock', 'Paper', 'Scissors'];
@@ -6,4 +6,10 @@ function computerPlay() {
     return computerChoice;
 }
 
-console.log(computerPlay())
+function play(playerSelection, computerSelection) {
+    if ((playerChoice === "Paper" && computerChoice === "Rock") ||
+        (playerChoice === "Rock" && computerChoice === "Scissors") ||
+        (playerChoice === "Scissors" && computerChoice === "Paper") {
+        console.log ("You win!", playerSelection, "beats", computerSelection)
+    }
+}
