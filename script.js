@@ -9,7 +9,7 @@ function computerPlay() {
 function play(playerSelection, computerSelection) {
     if ((playerChoice === "Paper" && computerChoice === "Rock") ||
         (playerChoice === "Rock" && computerChoice === "Scissors") ||
-        (playerChoice === "Scissors" && computerChoice === "Paper") {
-        console.log ("You win!", playerSelection, "beats", computerSelection)
+        (playerChoice === "Scissors" && computerChoice === "Paper")) {
+            console.log ("You win!", playerSelection, "beats", computerSelection)
     }
 }
