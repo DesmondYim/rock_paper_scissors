@@ -1,19 +1,10 @@
 window.onload = function() {
     let choices = ['rock', 'paper', 'scissors'];
     let roundResults = "";
+    let playerScore = 0;
+    let computerScore = 0;
 
-    // function playerChoose() {
-    //     // return playerChoice = prompt("Rock, paper, or scissors?"); // not working in loop
-    //     return prompt("Rock, paper, or scissors?");
-    // }
-
-    const resultsPara = document.createElement('div');
-    resultsPara.classList.add('resultsPara');
-    resultsPara.setAttribute('style', 'text-align:center;')
-
-    const body = document.querySelector('body');
-    body.appendChild(resultsPara);
-    
+    const results = ['win', 'loss', 'tie']
 
     function computerPlay() {
         let computerChoices = ['Rock', 'Paper', 'Scissors'];
@@ -22,34 +13,14 @@ window.onload = function() {
         return computerChoices[Math.floor(Math.random() * computerChoices.length)]
     }
 
-    const rockBtn = document.querySelector("#rock");
-    rockBtn.addEventListener('click', () => {
-        let playerSelection = "Rock";
-        roundResults = playRound(playerSelection, computerPlay());
-        resultsPara.textContent = roundResults;
-    })
-
-    const paperBtn = document.querySelector("#paper");
-    paperBtn.addEventListener('click', () => {
-        let playerSelection = "Paper";
-        roundResults = playRound(playerSelection, computerPlay());
-        resultsPara.textContent = roundResults;
-    })
-
-    const scissorsBtn = document.querySelector("#scissors");
-    scissorsBtn.addEventListener('click', () => {
-        let playerSelection = "Scissors";
-        roundResults = playRound(playerSelection, computerPlay());
-        resultsPara.textContent = roundResults;
-    })
-
-    const results = ['win', 'loss', 'tie']
-
-    
     function playRound(playerSelection, computerSelection) {
         const winCondition = (playerSelection === "Paper" && computerSelection === "Rock" ||
             playerSelection === "Rock" && computerSelection === "Scissors" ||
             playerSelection === "Scissors" && computerSelection === "Paper");
+        
+        const lossCondition = (playerSelection === "Paper" && computerSelection === "Scissors" ||
+            playerSelection === "Rock" && computerSelection === "Paper" ||
+            playerSelection === "Scissors" && computerSelection === "Rock");
         
         const tieCondition = playerSelection === computerSelection;
 
@@ -66,34 +37,73 @@ window.onload = function() {
         }
     }
 
-    let playerScore = 0;
-    let computerScore = 0;
+    function resetPlayerScore() {
+        return playerScore = 0;
+    }
+    function resetComputerScore() {
+        return computerScore = 0;
+    }
+    function clearGameResults() {
+        return gameResults = "";
+    }
 
-    // function playGame() {
-    //     let gameRound = 0
-    //     while (gameRound < 5) {
+    function playGame(playerSelection, computerSelection) {
+        playRound(playerSelection, computerSelection);
+        if (playerScore === 5) {
+            alert("You win!")
+            resetComputerScore();
+            resetPlayerScore();
+        } else if (computerScore === 5) {
+            alert("You lose!")
+            resetComputerScore();
+            resetPlayerScore();
+        } else if (playRound(playerSelection, computerSelection) == results[0]) {
+            return playerScore++;
+        } else if (playRound(playerSelection, computerSelection) == results[1]) {
+            return computerScore++;
+        }
+    }
+    
+    const resultsPara = document.createElement('div');
+    resultsPara.classList.add('resultsPara');
+    resultsPara.setAttribute('style', 'text-align:center');
+    
+    const score = document.createElement('div');
+    score.classList.add('score');
+    score.setAttribute('style', 'text-align:center');
+    score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`
+    
+    const body = document.querySelector('body');
+    body.appendChild(resultsPara);
+    body.appendChild(score);
 
-    //         let playerChoice = playerChoose();
-    //         let computerChoice = computerPlay();
-        
-    //         console.log(playRound(playerChoice, computerChoice));
-    //         if (playRound(playerChoice, computerChoice) == results[0]) {
-    //             console.log("Try again");
-    //         } else if (playRound(playerChoice, computerChoice) == results[1]) {
-    //             playerScore++;
-    //         } else if (playRound(playerChoice, computerChoice) == results[2]) {
-    //             computerScore++;
-    //         } else {
-    //             console.log(`No points for both!`)
-    //         }
-    //         gameRound++;
-    //     } 
-    // }
-    // playGame();
-    // if(playerScore > computerScore) {
-    //     console.log("You win!");
-    // } else {
-    //     console.log("You lose!");
-    // }
-    // console.log(`Your Score: ${playerScore}     Computer Score: ${computerScore}`);
+    const rockBtn = document.querySelector("#rock");
+    rockBtn.addEventListener('click', () => {
+        let playerSelection = "Rock";
+        let computerSelection = computerPlay();
+        playGame(playerSelection, computerSelection);
+        roundResults = playRound(playerSelection, computerSelection);
+        resultsPara.textContent = roundResults;
+        score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`
+    })
+
+    const paperBtn = document.querySelector("#paper");
+    paperBtn.addEventListener('click', () => {
+        let playerSelection = "Paper";
+        let computerSelection = computerPlay();
+        playGame(playerSelection, computerSelection);
+        roundResults = playRound(playerSelection, computerSelection);
+        resultsPara.textContent = roundResults;
+        score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`
+    })
+
+    const scissorsBtn = document.querySelector("#scissors");
+    scissorsBtn.addEventListener('click', () => {
+        let playerSelection = "Scissors";
+        let computerSelection = computerPlay();
+        playGame(playerSelection, computerSelection);
+        roundResults = playRound(playerSelection, computerSelection);
+        resultsPara.textContent = roundResults;
+        score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`
+    })
 }
