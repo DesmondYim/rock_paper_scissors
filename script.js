@@ -1,5 +1,4 @@
 window.onload = function() {
-    let choices = ['rock', 'paper', 'scissors'];
     let roundResults = "";
     let playerScore = 0;
     let computerScore = 0;
@@ -9,8 +8,6 @@ window.onload = function() {
 
     function computerPlay() {
         let computerChoices = ['Rock', 'Paper', 'Scissors'];
-        // let computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)]; // not working in loop
-        // return computerChoice;
         return computerChoices[Math.floor(Math.random() * computerChoices.length)]
     }
 
@@ -50,12 +47,6 @@ window.onload = function() {
 
     function playGame(playerSelection, computerSelection) {
         playRound(playerSelection, computerSelection);
-        // if (playerScore === 5) {
-        //     resetComputerScore();
-        //     resetPlayerScore();
-        // } else if (computerScore === 5) {
-        //     resetComputerScore();
-        //     resetPlayerScore();
         if (playRound(playerSelection, computerSelection) == results[0]) {
             return playerScore++;
         } else if (playRound(playerSelection, computerSelection) == results[1]) {
@@ -93,17 +84,32 @@ window.onload = function() {
         })
     }
 
-    const resultsPara = document.createElement('div');
-    resultsPara.classList.add('resultsPara');
-    resultsPara.setAttribute('style', 'text-align:center');
+    const ELEMENT = {
+        DIV: "div",
+    }
+
+    const CSSCLASS = {
+        RESULTPARA: "resultsPara",
+        SCORE: "score",
+        GAMEEND: "gameEnd",
+    }
+
+    const STYLE = {
+        TEXTALIGNCENTER: 'text-align:center',
+        
+    }
+
+    const resultsPara = document.createElement(ELEMENT.DIV);
+    resultsPara.classList.add(CSSCLASS.RESULTPARA);
+    resultsPara.setAttribute('style', STYLE.TEXTALIGNCENTER);
     
-    const score = document.createElement('div');
-    score.classList.add('score');
-    score.setAttribute('style', 'text-align:center');
+    const score = document.createElement(ELEMENT.DIV);
+    score.classList.add(CSSCLASS.SCORE);
+    score.setAttribute('style', STYLE.TEXTALIGNCENTER);
     score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`
 
-    const gameEnd = document.createElement('div');
-    gameEnd.classList.add('gameEnd');
+    const gameEnd = document.createElement(ELEMENT.DIV);
+    gameEnd.classList.add(CSSCLASS.GAMEEND);
     gameEnd.setAttribute('style', 'text-align:center', 'font-weight:900');
     
     const body = document.querySelector('body');
@@ -111,8 +117,8 @@ window.onload = function() {
     body.appendChild(score);
     body.appendChild(gameEnd);
 
-    const rockBtn = document.querySelector("#rock");
-    rockBtn.addEventListener('click', () => {
+    const handleRockClick = function () {
+        console.log("WOrking")
         if (playerScore < 5 && computerScore < 5) {
             let playerSelection = "Rock";
             let computerSelection = computerPlay();
@@ -123,7 +129,11 @@ window.onload = function() {
             endGame();
             gameEnd.textContent = gameResults;
         }
-    })
+    }
+
+    const rockBtn = document.querySelector("#rock");
+    rockBtn.addEventListener('click', handleRockClick)
+
 
     const paperBtn = document.querySelector("#paper");
     paperBtn.addEventListener('click', () => {
