@@ -11,7 +11,7 @@ window.onload = function() {
         return computerChoices[Math.floor(Math.random() * computerChoices.length)]
     }
 
-    function playRound(playerSelection, computerSelection) {
+    function getMatchResult(playerSelection, computerSelection) {
         const winCondition = (playerSelection === "Paper" && computerSelection === "Rock" ||
             playerSelection === "Rock" && computerSelection === "Scissors" ||
             playerSelection === "Scissors" && computerSelection === "Paper");
@@ -45,11 +45,10 @@ window.onload = function() {
         return gameResults = "";
     }
 
-    function playGame(playerSelection, computerSelection) {
-        playRound(playerSelection, computerSelection);
-        if (playRound(playerSelection, computerSelection) == results[0]) {
+    function changeScore(playerSelection, computerSelection) {
+        if (getMatchResult(playerSelection, computerSelection) == results[0]) {
             return playerScore++;
-        } else if (playRound(playerSelection, computerSelection) == results[1]) {
+        } else if (getMatchResult(playerSelection, computerSelection) == results[1]) {
             return computerScore++;
         }
     }
@@ -117,17 +116,34 @@ window.onload = function() {
     body.appendChild(score);
     body.appendChild(gameEnd);
 
+    const handleGame = function (playerSelection) {
+        let computerSelection = computerPlay();
+        changeScore(playerSelection, computerSelection);
+        roundResults = getMatchResult(playerSelection, computerSelection);
+        resultsPara.textContent = roundResults;
+        score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`;
+        endGame();
+        gameEnd.textContent = gameResults;
+    }
+
     const handleRockClick = function () {
-        console.log("WOrking")
         if (playerScore < 5 && computerScore < 5) {
             let playerSelection = "Rock";
-            let computerSelection = computerPlay();
-            playGame(playerSelection, computerSelection);
-            roundResults = playRound(playerSelection, computerSelection);
-            resultsPara.textContent = roundResults;
-            score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`;
-            endGame();
-            gameEnd.textContent = gameResults;
+            handleGame(playerSelection);
+        }
+    }
+
+    const handlePaperClick = function () {
+        if (playerScore < 5 && computerScore < 5) {
+            let playerSelection = "Paper";
+            handleGame(playerSelection);
+        }
+    }
+
+    const handleScissorsClick = function () {
+        if (playerScore < 5 && computerScore < 5) {
+            let playerSelection = "Scissors";
+            handleGame(playerSelection); 
         }
     }
 
@@ -136,30 +152,8 @@ window.onload = function() {
 
 
     const paperBtn = document.querySelector("#paper");
-    paperBtn.addEventListener('click', () => {
-        if (playerScore < 5 && computerScore < 5) {
-            let playerSelection = "Paper";
-            let computerSelection = computerPlay();
-            playGame(playerSelection, computerSelection);
-            roundResults = playRound(playerSelection, computerSelection);
-            resultsPara.textContent = roundResults;
-            score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`;
-            endGame();
-            gameEnd.textContent = gameResults;
-        }
-    })
+    paperBtn.addEventListener('click', handlePaperClick)
 
     const scissorsBtn = document.querySelector("#scissors");
-    scissorsBtn.addEventListener('click', () => {
-        if (playerScore < 5 && computerScore < 5) {
-            let playerSelection = "Scissors";
-            let computerSelection = computerPlay();
-            playGame(playerSelection, computerSelection);
-            roundResults = playRound(playerSelection, computerSelection);
-            resultsPara.textContent = roundResults;
-            score.textContent = `Your score: ${playerScore} and Computer score: ${computerScore}`;
-            endGame();
-            gameEnd.textContent = gameResults;
-        }
-    })
+        scissorsBtn.addEventListener('click', handleScissorsClick)
 }
